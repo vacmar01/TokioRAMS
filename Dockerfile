@@ -143,7 +143,8 @@ RUN set -eux \
   && git clone https://github.com/${BIA_GITHUB_USER_BRAINSTEM}/BrainSTEM.git /opt/BrainSTEM \
   && cd /opt/BrainSTEM \
   && git checkout ${BIA_BRANCH_BRAINSTEM} \
-  && git config submodule.modules/fatbACPC.url https://github.com/${BIA_GITHUB_USER_MODULE}/${BIA_MODULE}.git \
+# && git config submodule.modules/fatbACPC.url https://github.com/${BIA_GITHUB_USER_MODULE}/${BIA_MODULE}.git \
+  && git submodule add https://github.com/${BIA_GITHUB_USER_MODULE}/${BIA_MODULE}.git modules/${BIA_MODULE} \
   && git submodule update --init modules/${BIA_MODULE} \
   && cd /opt/BrainSTEM/modules/${BIA_MODULE} \
   && git checkout ${BIA_BRANCH_MODULE} \
@@ -167,6 +168,6 @@ RUN set -eux \
 
 USER bia
 
-EXPOSE 10104/tcp
+EXPOSE 10108/tcp
 
 ENTRYPOINT ["/opt/entry.bash"]
